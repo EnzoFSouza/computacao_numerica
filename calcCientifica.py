@@ -26,38 +26,27 @@ def f_cos(x, N):
         cos_aprox = cos_aprox + (sinal * num)/den
     return cos_aprox
 
-def show_exp():
-    resultado_exp = f_exp(valores_continuos, N)
+def show_graph(resultado, nome, cor):
     plt.figure(figsize = (10, 6))
-    plt.plot(valores_continuos, resultado_exp, label = 'Função Exponencial', linewidth = 2, color = 'blue', linestyle = 'dashed')
+    plt.plot(valores_continuos, resultado, label = nome, linewidth = 2, color = cor, linestyle = 'dashed')
     plt.legend(fontsize = 14)  
     plt.xlabel('Eixo x', fontsize = 16)
     plt.ylabel('Eixo y', fontsize = 16)
-    plt.title('Função Exponencial', fontsize = 20)
+    plt.title(nome, fontsize = 20)
     plt.grid(True, linestyle = '-.', alpha = 0.7)
     plt.show()
+
+def show_exp():
+    resultado_exp = f_exp(valores_continuos, N)
+    show_graph(resultado_exp, "Função Exponencial", "green")
 
 def show_sen():
     resultado_sen = f_sen(valores_continuos, N)
-    plt.figure(figsize = (10, 6))
-    plt.plot(valores_continuos, resultado_sen, label = 'Função Seno', linewidth = 2, color = 'blue', linestyle = 'dashed')
-    plt.legend(fontsize = 14)  
-    plt.xlabel('Eixo x', fontsize = 16)
-    plt.ylabel('Eixo y', fontsize = 16)
-    plt.title('Função Seno', fontsize = 20)
-    plt.grid(True, linestyle = '-.', alpha = 0.7)
-    plt.show()
+    show_graph(resultado_sen, "Função Seno", "blue")
 
 def show_cos():
     resultado_cos = f_cos(valores_continuos, N)
-    plt.figure(figsize = (10, 6))
-    plt.plot(valores_continuos, resultado_cos, label = 'Função Cosseno', linewidth = 2, color = 'blue', linestyle = 'dashed')
-    plt.legend(fontsize = 14)  
-    plt.xlabel('Eixo x', fontsize = 16)
-    plt.ylabel('Eixo y', fontsize = 16)
-    plt.title('Função Cosseno', fontsize = 20)
-    plt.grid(True, linestyle = '-.', alpha = 0.7)
-    plt.show()
+    show_graph(resultado_cos, "Função Cosseno", "red")
 
 valores_continuos = np.linspace(-6, 6, 100)
 N = 15
@@ -139,29 +128,3 @@ while opcao != "sair":
     opcao = input("conta, calc_func, graficos, sair: ")
     while(opcao != "conta" and opcao != "calc_func" and opcao != "graficos" and opcao != "sair"):
         opcao = input("conta, calc_func, graficos, sair: ")
-
-#resultado_exp = f_exp(valores_continuos, N)
-#resultado_sen = f_sen(valores_continuos, N)
-#resultado_cos = f_cos(valores_continuos, N)
-
-#plt.figure(figsize = (10, 6))
-#plt.plot(valores_continuos, resultado_exp, label = 'Função Exponencial', linewidth = 2, color = 'blue', linestyle = 'dashed')
-#plt.plot(valores_continuos, 250 * resultado_sen, label = 'Função Seno', linewidth = 2, color = 'red', linestyle = 'dotted')
-#plt.plot(valores_continuos, 250 * resultado_cos, label = 'Função Cosseno', linewidth = 2, color = 'green', linestyle = 'dashdot')
-#plt.legend(fontsize = 14)  
-#plt.xlabel('Eixo x', fontsize = 16)
-#plt.ylabel('Eixo y', fontsize = 16)
-#plt.title('Funções', fontsize = 20)
-#plt.grid(True, linestyle = '-.', alpha = 0.7)
-#plt.tick_params(labelsize = 14)  
-#plt.show()
-
-
-
-#print(f"Exponencial de {x} com {N} termos é {resultado_exp}")
-#print(f"Seno de {x} com {N} termos é {resultado_sen}")
-#print(f"Cosseno de {x} com {N} termos é {resultado_cos}")
-
-#exponencial: (x**n)/math.factorial(n)
-#seno: (((-1)**n) * (x ** ((2*n) + 1)))/math.factorial((2*n) + 1)
-#cosseno: (((-1)**n) * (x ** (2*n)))/math.factorial((2*n) + 1)
