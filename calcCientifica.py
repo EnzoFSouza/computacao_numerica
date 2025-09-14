@@ -26,6 +26,26 @@ def f_cos(x, N):
         cos_aprox = cos_aprox + (sinal * num)/den
     return cos_aprox
 
+def f_tg(x, N):
+    tg_aprox = f_sen(x, N) / f_cos(x, N)
+    return tg_aprox
+
+def f_senh(x, N):
+    senh_aprox = 0
+    for n in range(N):
+        num = (x ** (2*n + 1))
+        den = math.factorial(2*n + 1)
+        senh_aprox = senh_aprox + (num/den)
+    return senh_aprox
+
+def f_cosh(x, N):
+    cosh_aprox = 0
+    for n in range(N):
+        num = (x ** (2*n))
+        den = math.factorial(2*n)
+        cosh_aprox = cosh_aprox + (num/den)
+    return cosh_aprox
+
 def show_graph(resultado, nome, cor):
     plt.figure(figsize = (10, 6))
     plt.plot(valores_continuos, resultado, label = nome, linewidth = 2, color = cor, linestyle = 'dashed')
@@ -48,6 +68,19 @@ def show_cos():
     resultado_cos = f_cos(valores_continuos, N)
     show_graph(resultado_cos, "Função Cosseno", "red")
 
+def show_tg():
+    resultado_tg = f_tg(valores_continuos, N)
+    show_graph(resultado_tg, "Função Tangente", "green")
+
+def show_senh():
+    resultado_senh = f_senh(valores_continuos, N)
+    show_graph(resultado_senh, "Função Seno Hiperbólico", "yellow")
+
+def show_cosh():
+    resultado_cosh = f_cosh(valores_continuos, N)
+    show_graph(resultado_cosh, "Função Cosseno Hiperbólico", "green")
+
+lista_funcoes = ["exp", "sen", "cos", "tg", "senh", "cosh"]
 valores_continuos = np.linspace(-6, 6, 100)
 N = 15
 
@@ -92,9 +125,9 @@ while opcao != "sair":
             print("Nao existe divisao por zero")
 
     elif opcao == "calc_func":
-        func = input("exp, sen, cos: ")
-        while func != "exp" and func != "sen" and func != "cos":
-            func = input("exp, sen, cos: ")
+        func = input("exp, sen, cos, tg, senh, cosh: ")
+        while func not in lista_funcoes:
+            func = input("exp, sen, cos, tg, senh, cosh: ")
 
         valor = float(input("digite o valor: "))
         
@@ -109,11 +142,23 @@ while opcao != "sair":
         elif func == "cos":
             resultado_cos = f_cos(valor, N)
             print(resultado_cos)
-    
+        
+        elif func == "tg":
+            resultado_tg = f_tg(valor, N)
+            print(resultado_tg)
+
+        elif func == "senh":
+            resultado_senh = f_senh(valor, N)
+            print(resultado_senh)
+        
+        elif func == "cosh":
+            resultado_cosh = f_cosh(valor, N)
+            print(resultado_cosh)
+
     elif opcao == "graficos":
-        graficos = input("exp, sen, cos: ")
-        while graficos != "exp" and graficos != "sen" and graficos != "cos":
-            graficos = input("exp, sen, cos: ")
+        graficos = input("exp, sen, cos, tg, senh, cosh: ")
+        while graficos not in lista_funcoes:
+            graficos = input("exp, sen, cos, tg, senh, cosh: ")
 
         if graficos == "exp":
             show_exp()
@@ -123,7 +168,15 @@ while opcao != "sair":
 
         elif graficos == "cos":
             show_cos()
-    
+        
+        elif graficos == "tg":
+            show_tg()
+
+        elif graficos == "senh":
+            show_senh()
+
+        elif graficos == "cosh":
+            show_cosh()
     
     opcao = input("conta, calc_func, graficos, sair: ")
     while(opcao != "conta" and opcao != "calc_func" and opcao != "graficos" and opcao != "sair"):
