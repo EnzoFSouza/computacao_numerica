@@ -46,6 +46,10 @@ def f_cosh(x, N):
         cosh_aprox = cosh_aprox + (num/den)
     return cosh_aprox
 
+def f_tgh(x, N):
+    tgh_aprox = f_senh(x, N) / f_cosh(x, N)
+    return tgh_aprox
+
 def show_graph(resultado, nome, cor):
     plt.figure(figsize = (10, 6))
     plt.plot(valores_continuos, resultado, label = nome, linewidth = 2, color = cor, linestyle = 'dashed')
@@ -80,7 +84,11 @@ def show_cosh():
     resultado_cosh = f_cosh(valores_continuos, N)
     show_graph(resultado_cosh, "Função Cosseno Hiperbólico", "green")
 
-lista_funcoes = ["exp", "sen", "cos", "tg", "senh", "cosh"]
+def show_tgh():
+    resultado_tgh = f_tgh(valores_continuos, N)
+    show_graph(resultado_tgh, "Função Tangente Hiperbólica", "green")
+
+lista_funcoes = ["exp", "sen", "cos", "tg", "senh", "cosh", "tgh"]
 valores_continuos = np.linspace(-6, 6, 100)
 N = 15
 
@@ -125,9 +133,9 @@ while opcao != "sair":
             print("Nao existe divisao por zero")
 
     elif opcao == "calc_func":
-        func = input("exp, sen, cos, tg, senh, cosh: ")
+        func = input("exp, sen, cos, tg, senh, cosh, tgh: ")
         while func not in lista_funcoes:
-            func = input("exp, sen, cos, tg, senh, cosh: ")
+            func = input("exp, sen, cos, tg, senh, cosh, tgh: ")
 
         valor = float(input("digite o valor: "))
         
@@ -155,10 +163,14 @@ while opcao != "sair":
             resultado_cosh = f_cosh(valor, N)
             print(resultado_cosh)
 
+        elif func == "tgh":
+            resultado_tgh = f_tgh(valor, N)
+            print(resultado_tgh)
+
     elif opcao == "graficos":
-        graficos = input("exp, sen, cos, tg, senh, cosh: ")
+        graficos = input("exp, sen, cos, tg, senh, cosh, tgh: ")
         while graficos not in lista_funcoes:
-            graficos = input("exp, sen, cos, tg, senh, cosh: ")
+            graficos = input("exp, sen, cos, tg, senh, cosh, tgh: ")
 
         if graficos == "exp":
             show_exp()
@@ -177,7 +189,10 @@ while opcao != "sair":
 
         elif graficos == "cosh":
             show_cosh()
-    
+
+        elif graficos == "tgh":
+            show_tgh()
+            
     opcao = input("conta, calc_func, graficos, sair: ")
     while(opcao != "conta" and opcao != "calc_func" and opcao != "graficos" and opcao != "sair"):
         opcao = input("conta, calc_func, graficos, sair: ")
