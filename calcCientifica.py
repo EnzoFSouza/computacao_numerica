@@ -65,6 +65,27 @@ def f_tgh(x, N):
     tgh_aprox = f_senh(x, N) / f_cosh(x, N)
     return tgh_aprox
 
+def f_piso(x):
+    if x >= 0:
+        return int(x)
+    
+    else:
+        if x == int(x):
+            return int(x)
+
+        else:
+            return int(x) - 1
+
+def f_teto(x):
+    if x == int(x):
+        return int(x)
+
+    elif x > 0:
+        return int(x) + 1
+
+    else:
+        return int(x)
+
 def show_graph(resultado, nome, cor):
     plt.figure(figsize = (10, 6))
     plt.plot(valores_continuos, resultado, label = nome, linewidth = 2, color = cor)
@@ -79,6 +100,14 @@ def show_abs():
     resultado_abs = f_abs(valores_continuos)
     show_graph(resultado_abs, "Função Módulo", "red")
 
+"""def show_piso():
+    resultado_piso = f_piso(valores_continuos)
+    show_graph(resultado_piso, "Função Piso", "red")
+
+def show_teto():
+    resultado_teto = f_teto(valores_continuos)
+    show_graph(resultado_teto, "Função Teto", "red")
+"""
 def show_exp():
     resultado_exp = f_exp(valores_continuos, N)
     show_graph(resultado_exp, "Função Exponencial", "green")
@@ -121,7 +150,7 @@ def show_tgh():
 
 lista_opcoes = ["conta", "calc_func", "graficos", "sair"]
 lista_operacoes = ["+", "-", "*", "/", "%"]
-lista_funcoes = ["abs", "exp", "sen", "cos", "tg", "sec", "cossec", "cotg", "senh", "cosh", "tgh"]
+lista_funcoes = ["abs", "piso", "teto", "exp", "sen", "cos", "tg", "sec", "cossec", "cotg", "senh", "cosh", "tgh"]
 valores_continuos = np.linspace(-6, 6, 100)
 N = 15
 
@@ -166,15 +195,23 @@ while opcao != "sair":
             print("Nao existe divisao por zero")
 
     elif opcao == "calc_func":
-        func = input("abs, exp, sen, cos, tg, sec, cossec, cotg, senh, cosh, tgh: ")
+        func = input("abs, piso, teto, exp, sen, cos, tg, sec, cossec, cotg, senh, cosh, tgh: ")
         while func not in lista_funcoes:
-            func = input("abs, exp, sen, cos, tg, sec, cossec, cotg, senh, cosh, tgh: ")
+            func = input("abs, piso, teto, exp, sen, cos, tg, sec, cossec, cotg, senh, cosh, tgh: ")
 
         valor = float(input("digite o valor: "))
         
         if func == "abs":
             resultado_abs = f_abs(valor)
             print(resultado_abs)
+
+        elif func == "piso":
+            resultado_piso = f_piso(valor)
+            print(resultado_piso)
+        
+        elif func == "teto":
+            resultado_teto = f_teto(valor)
+            print(resultado_teto)
 
         elif func == "exp":
             resultado_exp = f_exp(valor, N)
@@ -223,6 +260,12 @@ while opcao != "sair":
 
         if graficos == "abs":
             show_abs()
+
+        #elif graficos == "piso":
+        #    show_piso()
+        
+        #elif graficos == "teto":
+        #    show_teto()
 
         elif graficos == "exp":
             show_exp()
