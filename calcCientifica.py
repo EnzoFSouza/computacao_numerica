@@ -66,25 +66,10 @@ def f_tgh(x, N):
     return tgh_aprox
 
 def f_piso(x):
-    if x >= 0:
-        return int(x)
+    return math.floor(x)
     
-    else:
-        if x == int(x):
-            return int(x)
-
-        else:
-            return int(x) - 1
-
 def f_teto(x):
-    if x == int(x):
-        return int(x)
-
-    elif x > 0:
-        return int(x) + 1
-
-    else:
-        return int(x)
+    return math.ceil(x)
 
 def show_graph(resultado, nome, cor):
     plt.figure(figsize = (10, 6))
@@ -96,18 +81,6 @@ def show_graph(resultado, nome, cor):
     plt.grid(True, linestyle = '-.', alpha = 0.7)
     plt.show()
 
-def show_abs():
-    resultado_abs = f_abs(valores_continuos)
-    show_graph(resultado_abs, "Função Módulo", "red")
-
-"""def show_piso():
-    resultado_piso = f_piso(valores_continuos)
-    show_graph(resultado_piso, "Função Piso", "red")
-
-def show_teto():
-    resultado_teto = f_teto(valores_continuos)
-    show_graph(resultado_teto, "Função Teto", "red")
-"""
 def show_exp():
     resultado_exp = f_exp(valores_continuos, N)
     show_graph(resultado_exp, "Função Exponencial", "green")
@@ -254,20 +227,11 @@ while opcao != "sair":
             print(resultado_tgh)
 
     elif opcao == "graficos":
-        graficos = input("abs, exp, sen, cos, tg, sec, cossec, cotg, senh, cosh, tgh: ")
+        graficos = input("exp, sen, cos, tg, sec, cossec, cotg, senh, cosh, tgh: ")
         while graficos not in lista_funcoes:
-            graficos = input("abs, exp, sen, cos, tg, sec, cossec, cotg, senh, cosh, tgh: ")
+            graficos = input("exp, sen, cos, tg, sec, cossec, cotg, senh, cosh, tgh: ")
 
-        if graficos == "abs":
-            show_abs()
-
-        #elif graficos == "piso":
-        #    show_piso()
-        
-        #elif graficos == "teto":
-        #    show_teto()
-
-        elif graficos == "exp":
+        if graficos == "exp":
             show_exp()
 
         elif graficos == "sen":
