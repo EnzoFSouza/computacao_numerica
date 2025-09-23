@@ -71,7 +71,7 @@ def f_piso(x):
 def f_teto(x):
     return math.ceil(x)
 
-def show_graph(resultado, nome, cor):
+def show_graph(resultado, pontos, nome, cor):
     plt.figure(figsize = (10, 6))
     plt.plot(valores_continuos, resultado, label = nome, linewidth = 2, color = cor)
     plt.legend(fontsize = 14)  
@@ -79,51 +79,63 @@ def show_graph(resultado, nome, cor):
     plt.ylabel('Eixo y', fontsize = 16)
     plt.title(nome, fontsize = 20)
     plt.grid(True, linestyle = '-.', alpha = 0.7)
+    plt.scatter(lista_valores_x_func, pontos)
     plt.show()
 
 def show_exp():
     resultado_exp = f_exp(valores_continuos, N)
-    show_graph(resultado_exp, "Função Exponencial", "green")
+    pontos_exp = f_exp(lista_valores_x_func, N)
+    show_graph(resultado_exp, pontos_exp, "Função Exponencial", "green")
 
 def show_sen():
     resultado_sen = f_sen(valores_continuos, N)
-    show_graph(resultado_sen, "Função Seno", "blue")
+    pontos_sen = f_sen(lista_valores_x_func, N)
+    show_graph(resultado_sen, pontos_sen, "Função Seno", "blue")
 
 def show_cos():
     resultado_cos = f_cos(valores_continuos, N)
-    show_graph(resultado_cos, "Função Cosseno", "red")
+    pontos_cos = f_cos(lista_valores_x_func, N)
+    show_graph(resultado_cos, pontos_cos, "Função Cosseno", "red")
 
 def show_tg():
     resultado_tg = f_tg(valores_continuos, N)
-    show_graph(resultado_tg, "Função Tangente", "green")
+    pontos_tg = f_tg(lista_valores_x_func, N)
+    show_graph(resultado_tg, pontos_tg, "Função Tangente", "green")
 
 def show_sec():
     resultado_sec = f_sec(valores_continuos, N)
-    show_graph(resultado_sec, "Função Secante", "blue")
+    pontos_sec = f_sec(lista_valores_x_func, N)
+    show_graph(resultado_sec, pontos_sec, "Função Secante", "blue")
 
 def show_cotg():
     resultado_cotg = f_cotg(valores_continuos, N)
-    show_graph(resultado_cotg, "Função Cotangente", "blue")
+    pontos_cotg = f_cotg(lista_valores_x_func, N)
+    show_graph(resultado_cotg, pontos_cotg, "Função Cotangente", "blue")
 
 def show_cossec():
     resultado_cossec = f_cossec(valores_continuos, N)
-    show_graph(resultado_cossec, "Função Cossecante", "blue")
+    pontos_cossec = f_cossec(lista_valores_x_func, N)
+    show_graph(resultado_cossec, pontos_cossec, "Função Cossecante", "blue")
 
 def show_senh():
     resultado_senh = f_senh(valores_continuos, N)
-    show_graph(resultado_senh, "Função Seno Hiperbólico", "yellow")
+    pontos_senh = f_senh(lista_valores_x_func, N)
+    show_graph(resultado_senh, pontos_senh, "Função Seno Hiperbólico", "yellow")
 
 def show_cosh():
     resultado_cosh = f_cosh(valores_continuos, N)
-    show_graph(resultado_cosh, "Função Cosseno Hiperbólico", "green")
+    pontos_cosh = f_cosh(lista_valores_x_func, N)
+    show_graph(resultado_cosh, pontos_cosh, "Função Cosseno Hiperbólico", "green")
 
 def show_tgh():
     resultado_tgh = f_tgh(valores_continuos, N)
-    show_graph(resultado_tgh, "Função Tangente Hiperbólica", "green")
+    pontos_tgh = f_tgh(lista_valores_x_func, N)
+    show_graph(resultado_tgh, pontos_tgh, "Função Tangente Hiperbólica", "green")
 
 lista_opcoes = ["conta", "calc_func", "graficos", "sair"]
 lista_operacoes = ["+", "-", "*", "/", "%"]
 lista_funcoes = ["abs", "piso", "teto", "exp", "sen", "cos", "tg", "sec", "cossec", "cotg", "senh", "cosh", "tgh"]
+lista_valores_x_func = np.array([])
 valores_continuos = np.linspace(-6, 6, 100)
 N = 15
 
@@ -173,7 +185,8 @@ while opcao != "sair":
             func = input("abs, piso, teto, exp, sen, cos, tg, sec, cossec, cotg, senh, cosh, tgh: ")
 
         valor = float(input("digite o valor: "))
-        
+        lista_valores_x_func = np.append(lista_valores_x_func, valor)
+
         if func == "abs":
             resultado_abs = f_abs(valor)
             print(resultado_abs)
