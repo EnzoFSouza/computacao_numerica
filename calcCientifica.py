@@ -71,6 +71,20 @@ def f_piso(x):
 def f_teto(x):
     return math.ceil(x)
 
+def tratarTxt(txt):
+    if "/" in txt:
+        numero_txt = txt[txt.find("/") + 1:]
+        numero = float(int(numero_txt))
+        return np.pi / numero
+
+    elif "*" in txt:
+        numero_txt = txt[txt.find("*") + 1:]
+        numero = float(int(numero_txt))
+        return np.pi * numero
+    
+    else:
+        return np.pi
+    
 def show_graph(resultado, pontos, nome, cor):
     plt.figure(figsize = (10, 6))
     plt.plot(valores_continuos, resultado, label = nome, linewidth = 2, color = cor)
@@ -80,6 +94,12 @@ def show_graph(resultado, pontos, nome, cor):
     plt.title(nome, fontsize = 20)
     plt.grid(True, linestyle = '-.', alpha = 0.7)
     plt.scatter(lista_valores_x_func, pontos)
+    for i in range(len(lista_valores_x_func)):
+        plt.annotate(
+            f'({lista_valores_x_func[i]:.3f}, {pontos[i]:.3f})',
+            xy = (lista_valores_x_func[i], pontos[i])
+        )
+
     plt.show()
 
 def show_exp():
@@ -184,7 +204,14 @@ while opcao != "sair":
         while func not in lista_funcoes:
             func = input("abs, piso, teto, exp, sen, cos, tg, sec, cossec, cotg, senh, cosh, tgh: ")
 
-        valor = float(input("digite o valor: "))
+        valor = input("digite o valor: ")
+
+        if "pi" in valor:
+            valor = tratarTxt(valor)
+
+        else:
+            valor = float(valor)
+
         lista_valores_x_func = np.append(lista_valores_x_func, valor)
 
         if func == "abs":
